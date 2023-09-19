@@ -1,2 +1,2 @@
 # Выведите имена файлов, в которых встречается слово int
-grep -r "int"
+grep --files-with-matches int *
