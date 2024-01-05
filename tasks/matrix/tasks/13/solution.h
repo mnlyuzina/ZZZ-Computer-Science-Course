@@ -76,15 +76,11 @@ int Task() {
     int32_t size = MatrixSize();
     Matrix input_matrix = ReadMatrix(size);
     int32_t max = MaxElement(input_matrix, size);
-    Matrix result = InputMatrix(size);
-    result = SubmatrixMul(input_matrix, size, max);
-    PrintResult(result, size);
+    input_matrix = SubmatrixMul(input_matrix, size, max);
+    PrintResult(input_matrix, size);
     for (int32_t i = 0; i < size; ++i) {
         free(input_matrix[i]);
-        free(result[i]);
     }
     free(input_matrix);
-    free(result);
-
     return 0;
 }
