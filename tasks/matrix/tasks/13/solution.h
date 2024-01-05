@@ -27,6 +27,7 @@ Matrix ReadMatrix(int32_t size) {
     Matrix input_matrix = InputMatrix(size);
     printf("Input matrix\n");
     printf("---------------\n");
+    fscanf(file, "%*s");  //пропускает первую строку файла
     for (int32_t i = 0; i < size && !feof(file); ++i) {
         for (int32_t j = 0; j < size && !feof(file); ++j) {
             fscanf(file, "%d", &input_matrix[i][j]);
@@ -75,11 +76,15 @@ int Task() {
     int32_t size = MatrixSize();
     Matrix input_matrix = ReadMatrix(size);
     int32_t max = MaxElement(input_matrix, size);
-    Matrix result = SubmatrixMul(input_matrix, size, max);
+    Matrix result = InputMatrix(size);
+    result = SubmatrixMul(input_matrix, size, max);
     PrintResult(result, size);
     for (int32_t i = 0; i < size; ++i) {
         free(input_matrix[i]);
+        free(result[i]);
     }
     free(input_matrix);
+    free(result);
+
     return 0;
 }
