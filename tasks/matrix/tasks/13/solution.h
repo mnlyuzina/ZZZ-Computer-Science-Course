@@ -14,11 +14,16 @@ Matrix InputMatrix(int32_t size) {
     return input_matrix;
 }
 
-Matrix ReadMatrix(int32_t* n) {
+int32_t MatrixSize() {
     int32_t size = 0;
     FILE* file = fopen("test.txt", "r");
     fscanf(file, "%d", &size);
-    *n = size;
+    fclose(file);
+    return size;
+}
+
+Matrix ReadMatrix(int32_t size) {
+    FILE* file = fopen("test.txt", "r");
     Matrix input_matrix = InputMatrix(size);
     printf("Input matrix\n");
     printf("---------------\n");
@@ -67,9 +72,8 @@ void PrintResult(Matrix result, int32_t size) {
 }
 
 int Task() {
-    int32_t size = 0;
-    int32_t* n = &size;
-    Matrix input_matrix = ReadMatrix(n);
+    int32_t size = MatrixSize();
+    Matrix input_matrix = ReadMatrix(size);
     int32_t max = MaxElement(input_matrix, size);
     Matrix result = SubmatrixMul(input_matrix, size, max);
     PrintResult(result, size);
