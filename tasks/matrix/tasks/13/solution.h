@@ -14,16 +14,16 @@ Matrix InputMatrix(int32_t size) {
     return input_matrix;
 }
 
-int32_t MatrixSize() {
+int32_t MatrixSize(const char* path) {
     int32_t size = 0;
-    FILE* file = fopen("test.txt", "r");
+    FILE* file = fopen(path, "r");
     fscanf(file, "%d", &size);
     fclose(file);
     return size;
 }
 
-Matrix ReadMatrix(int32_t size, Matrix input_matrix) {
-    FILE* file = fopen("test.txt", "r");
+Matrix ReadMatrix(int32_t size, Matrix input_matrix, const char* path) {
+    FILE* file = fopen(path, "r");
     if (file == NULL) {
         perror("Failed to open file");
         exit(EXIT_FAILURE);
@@ -76,9 +76,10 @@ void PrintResult(Matrix result, int32_t size) {
 }
 
 int Task() {
-    int32_t size = MatrixSize();
+    const char* path = "../tasks/matrix/tasks/13/test.txt";
+    int32_t size = MatrixSize(path);
     Matrix input_matrix = InputMatrix(size);
-    input_matrix = ReadMatrix(size, input_matrix);
+    input_matrix = ReadMatrix(size, input_matrix, path);
     int32_t max = MaxElement(input_matrix, size);
     input_matrix = SubmatrixMul(input_matrix, size, max);
     PrintResult(input_matrix, size);
