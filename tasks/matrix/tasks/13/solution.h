@@ -24,6 +24,10 @@ int32_t MatrixSize() {
 
 Matrix ReadMatrix(int32_t size, Matrix input_matrix) {
     FILE* file = fopen("test.txt", "r");
+    if (file == NULL) {
+        perror("Failed to open file");
+        exit(EXIT_FAILURE);
+    }
     printf("Input matrix\n");
     printf("---------------\n");
     fscanf(file, "%*s");  //пропускает первую строку файла
